@@ -9,6 +9,7 @@ import {
   DocViewerRef,
   IConfig,
   IDocument,
+  IRenderPage,
   ITheme,
 } from "./models";
 import { DocViewerRenderers } from "./renderers";
@@ -27,15 +28,15 @@ export interface DocViewerProps {
   language?: AvailableLanguages;
   activeDocument?: IDocument;
   onDocumentChange?: (document: IDocument) => void;
+  renderPage?: (props: IRenderPage) => JSX.Element;
 }
 
 const DocViewer = forwardRef<DocViewerRef, DocViewerProps>((props, ref) => {
-  const { documents, theme } = props;
+  const { documents, theme, children } = props;
 
   if (!documents) {
     throw new Error("Please provide an array of documents to DocViewer!");
   }
-
   return (
     <DocViewerProvider
       ref={ref}
@@ -54,7 +55,7 @@ const DocViewer = forwardRef<DocViewerRef, DocViewerProps>((props, ref) => {
   );
 });
 
-export default memo(DocViewer);
+export default DocViewer;
 
 const Container = styled.div`
   display: flex;

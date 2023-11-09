@@ -1,6 +1,7 @@
 /* eslint-disable */
-import React, { FC, useContext, useEffect } from "react";
+import React, { FC, useContext, useEffect, memo } from "react";
 import { Document } from "react-pdf";
+
 import styled from "styled-components";
 import { useTranslation } from "../../../../hooks/useTranslation";
 import { PDFContext } from "../../state";
@@ -8,6 +9,8 @@ import { setNumPages } from "../../state/actions";
 import { initialPDFState } from "../../state/reducer";
 import { PDFAllPages } from "./PDFAllPages";
 import PDFSinglePage from "./PDFSinglePage";
+
+import { Viewer } from '@react-pdf-viewer/core';
 
 const PDFPages: FC<{}> = () => {
   const {
@@ -26,16 +29,19 @@ const PDFPages: FC<{}> = () => {
 
   return (
     <DocumentPDF
-      file={currentDocument.fileData}
-      onLoadSuccess={({ numPages }) => dispatch(setNumPages(numPages))}
-      loading={<span>{t("pdfPluginLoading")}</span>}
+      // file={currentDocument.fileData}
+      // onLoadSuccess={({ numPages }) => dispatch(setNumPages(numPages))}
+      // loading={<span>{t("pdfPluginLoading")}</span>}
     >
-      {paginated ? <PDFSinglePage /> : <PDFAllPages />}
+
+      <PDFSinglePage />
+      {/* {paginated ? <PDFSinglePage /> : <PDFAllPages />} */}
     </DocumentPDF>
+
   );
 };
 
-const DocumentPDF = styled(Document)`
+const DocumentPDF = styled.div`
   display: flex;
   flex-direction: column;
   margin: 0 auto;

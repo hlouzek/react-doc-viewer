@@ -1,5 +1,4 @@
 import React from "react";
-import { pdfjs } from "react-pdf";
 import styled from "styled-components";
 import { DocRenderer, IStyledProps } from "../..";
 import PDFPages from "./components/pages/PDFPages";
@@ -7,17 +6,22 @@ import PDFControls from "./components/PDFControls";
 import { PDFProvider } from "./state";
 import "react-pdf/dist/esm/Page/AnnotationLayer.css";
 import "react-pdf/dist/esm/Page/TextLayer.css";
-
-pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.js`;
+import { Worker, Viewer } from '@react-pdf-viewer/core';
+import '@react-pdf-viewer/core/lib/styles/index.css';
 
 const PDFRenderer: DocRenderer = ({ mainState }) => {
+
   return (
-    <PDFProvider mainState={mainState}>
-      <Container id="pdf-renderer" data-testid="pdf-renderer">
-        <PDFControls />
-        <PDFPages />
-      </Container>
-    </PDFProvider>
+    <Worker workerUrl="https://unpkg.com/pdfjs-dist@3.4.120/build/pdf.worker.min.js">
+      <PDFProvider mainState={mainState}>
+        <Container id="pdf-renderer" data-testid="pdf-renderer">
+          <Viewer fileUrl={require('./faktura.pdf')} />          
+          <PDFControls />
+          <PDFPages />
+        </Container>
+      </PDFProvider>
+    </Worker>
+
   );
 };
 
@@ -35,8 +39,8 @@ const Container = styled.div`
   /* width */
   &::-webkit-scrollbar {
     ${(props: IStyledProps) => {
-      return props.theme.disableThemeScrollbar ? "" : "width: 10px";
-    }};
+    return props.theme.disableThemeScrollbar ? "" : "width: 10px";
+  }};
   }
   /* Track */
   &::-webkit-scrollbar-track {

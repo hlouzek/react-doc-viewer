@@ -1,4 +1,4 @@
-import { DocRenderer, IConfig, IDocument } from "..";
+import { DocRenderer, IConfig, IDocument, IRenderPage } from "..";
 import {
   MainStateActions,
   NEXT_DOCUMENT,
@@ -29,6 +29,7 @@ export type IMainState = {
   language: AvailableLanguages;
   activeDocument?: IDocument;
   onDocumentChange?: (document: IDocument) => void;
+  renderPage?: (props: IRenderPage) => JSX.Element;
 };
 
 export const initialState: IMainState = {

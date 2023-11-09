@@ -65,7 +65,6 @@ export const useDocumentLoader = (): {
         controller.abort();
       };
     },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     [currentFileNo, documentURI, currentDocument],
   );
 
@@ -108,7 +107,6 @@ export const useDocumentLoader = (): {
     return () => {
       controller.abort();
     };
-    /* eslint-disable react-hooks/exhaustive-deps */
   }, [CurrentRenderer, currentFileNo]);
 
   return { state, dispatch, CurrentRenderer };

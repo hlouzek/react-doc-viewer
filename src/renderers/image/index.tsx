@@ -4,19 +4,26 @@ import { DocRenderer } from "../..";
 
 const ImageProxyRenderer: DocRenderer = (props) => {
   const {
-    mainState: { currentDocument },
+    mainState,
+    mainState: { currentDocument, renderPage, rendererRect},
     children,
   } = props;
+  const _height = (rendererRect?.height || 100) - 100;
+  const _width = (rendererRect?.width || 100) - 100;
 
   if (!currentDocument) return null;
 
-  return (
+  const canvasLayer: JSX.Element = (
     <Container id="image-renderer" {...props}>
       {children || (
         <Img id="image-img" src={currentDocument.fileData as string} />
       )}
     </Container>
-  );
+  )
+
+  if (!renderPage) return canvasLayer;
+  return renderPage({ mainState, canvasLayer, scale: 1, height: _height, width: _width });
+
 };
 
 export default ImageProxyRenderer;

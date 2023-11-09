@@ -65,6 +65,15 @@ export interface IDocument {
   fileName?: string;
 }
 
+export interface IRenderPage {
+  mainState: IMainState | undefined;
+  canvasLayer: JSX.Element;
+  scale?: number,
+  pageNum?: number,
+  height?: number,
+  width?: number
+}
+
 export interface DocRendererProps {
   mainState: IMainState;
 }

@@ -45,8 +45,23 @@ export const setCurrentPage = (value: number): SetCurrentPage => ({
   value,
 });
 
+export const SET_ORIGIN_PAGE: string = "SET_ORIGIN_PAGE";
+
+export interface SetOriginPage {
+  type: typeof SET_ORIGIN_PAGE,
+  originWidth: number,
+  originHeight: number
+}
+
+export const setOrigin = (originWidth: number, originHeight: number): SetOriginPage => ({
+  type: SET_ORIGIN_PAGE,
+  originWidth,
+  originHeight,
+})
+
 export type PDFActions =
   | SetZoomLevel
   | SetPDFPaginated
   | SetNumPages
-  | SetCurrentPage;
+  | SetCurrentPage
+  | SetOriginPage;

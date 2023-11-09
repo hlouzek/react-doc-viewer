@@ -15,6 +15,7 @@ export const LoadingTimeout: FC<PropsWithChildren> = ({ children }) => {
   );
 
   useEffect(() => {
+    
     setTimeout(
       () => {
         setShouldLoadingRender(true);

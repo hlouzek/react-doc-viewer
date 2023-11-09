@@ -2,6 +2,7 @@ import { IMainState } from "../../../store/mainStateReducer";
 import {
   PDFActions as PDFStateActions,
   SetCurrentPage,
+  SetOriginPage,
   SetNumPages,
   SetPDFPaginated,
   SetZoomLevel,
@@ -9,6 +10,7 @@ import {
   SET_NUM_PAGES,
   SET_PDF_PAGINATED,
   SET_ZOOM_LEVEL,
+  SET_ORIGIN_PAGE
 } from "./actions";
 
 export type IPDFState = {
@@ -18,6 +20,8 @@ export type IPDFState = {
   paginated: boolean;
   numPages: number;
   currentPage: number;
+  originWidth: number | null,
+  originHeight: number | null,
   mainState?: IMainState;
 };
 
@@ -28,6 +32,8 @@ export const initialPDFState: IPDFState = {
   paginated: true,
   numPages: 0,
   currentPage: 1,
+  originWidth: null,
+  originHeight: null
 };
 
 export type PDFStateReducer = (
@@ -59,6 +65,11 @@ export const reducer: PDFStateReducer = (
     case SET_CURRENT_PAGE: {
       const { value } = action as SetCurrentPage;
       return { ...state, currentPage: value };
+    }
+
+    case SET_ORIGIN_PAGE: {
+      const { originWidth, originHeight } = action as SetOriginPage;
+      return { ...state, originWidth, originHeight };
     }
 
     default:

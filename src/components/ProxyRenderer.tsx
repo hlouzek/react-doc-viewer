@@ -20,7 +20,6 @@ export const ProxyRenderer: FC = () => {
     (node: HTMLDivElement) => {
       node && dispatch(setRendererRect(node?.getBoundingClientRect()));
     },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     [size],
   );
 
@@ -66,7 +65,6 @@ export const ProxyRenderer: FC = () => {
             <OverrideComponent document={currentDocument} fileName={fileName} />
           );
         }
-
         return (
           <div id="no-renderer" data-testid="no-renderer">
             {t("noRendererMessage", {
