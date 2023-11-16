@@ -57,8 +57,8 @@ const PDFSinglePage: FC<Props> = ({ pageNum }) => {
 
   return useMemo(() => canvasLayer, []);
 
-  // if (!renderPage) return canvasLayer;
-  // return renderPage({ mainState, canvasLayer, scale: zoomLevel * scale, pageNum: _pageNum, height: _height, width: _width });
+  if (!renderPage) return canvasLayer;
+  return renderPage({ mainState, canvasLayer, scale: zoomLevel * scale, pageNum: _pageNum, height: _height, width: _width });
 };
 
 export default PDFSinglePage;
